@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaHeartbeat, FaEnvelope, FaLock, FaUser } from 'react-icons/fa';
+import { FaHeartbeat, FaEnvelope, FaLock, FaUser, FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, clearError } from '../store/slices/authSlice';
@@ -46,27 +46,63 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden"
-      >
-        <div className="bg-primary/10 py-8 px-6 text-center">
-          <Link to="/" className="inline-flex items-center space-x-2">
-            <FaHeartbeat className="text-4xl text-primary" />
-            <span className="text-3xl font-bold text-gray-900 tracking-tight">Medicure</span>
-          </Link>
-          <h2 className="mt-6 text-2xl font-bold text-gray-900">Create an Account</h2>
-          <p className="mt-2 text-sm text-gray-600">Join our hospital management platform</p>
+    <div className="min-h-screen flex">
+      {/* Left side - Image/Gradient */}
+      <div className="hidden lg:flex lg:flex-1 relative overflow-hidden bg-primary/5">
+        <div className="absolute inset-0 bg-gradient-premium opacity-90 mix-blend-multiply"></div>
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-12 -right-12 w-72 h-72 bg-purple-400/30 rounded-full blur-3xl"></div>
+        
+        <div className="relative w-full flex flex-col justify-center items-center px-12 text-white z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="glass-dark p-12 rounded-3xl max-w-lg"
+          >
+            <h3 className="text-4xl font-extrabold mb-6 leading-tight">Join Our Healthcare Community</h3>
+            <p className="text-lg text-gray-200 mb-8 leading-relaxed">
+              Create an account to unlock personalized healthcare services, manage your family's health records, and seamlessly book appointments.
+            </p>
+            <div className="flex justify-center gap-6 mt-8">
+              <div className="text-center">
+                <p className="text-3xl font-bold">50+</p>
+                <p className="text-sm text-gray-300">Specialists</p>
+              </div>
+              <div className="w-px bg-white/20"></div>
+              <div className="text-center">
+                <p className="text-3xl font-bold">24/7</p>
+                <p className="text-sm text-gray-300">Support</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
+      </div>
 
-        <div className="py-8 px-8">
+      {/* Right side - Form */}
+      <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mx-auto w-full max-w-md"
+        >
+          <div className="mb-8 text-center sm:text-left">
+            <Link to="/" className="inline-flex items-center space-x-3 mb-6">
+              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                <FaHeartbeat className="text-2xl text-primary" />
+              </div>
+              <span className="text-2xl font-extrabold text-gray-900 tracking-tight">Medicure</span>
+            </Link>
+            <h2 className="text-4xl font-extrabold text-gray-900 mb-2">Create Account</h2>
+            <p className="text-lg text-gray-500">Join us to start your healthcare journey.</p>
+          </div>
+
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Full Name</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaUser className="text-gray-400" />
                 </div>
                 <input
@@ -75,16 +111,16 @@ const Register = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-lg py-3 bg-gray-50 outline-none border hover:border-gray-400 transition"
+                  className="block w-full pl-11 pr-3 py-3.5 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white transition-all duration-200 sm:text-sm"
                   placeholder="John Doe"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email Address</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaEnvelope className="text-gray-400" />
                 </div>
                 <input
@@ -93,16 +129,16 @@ const Register = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-lg py-3 bg-gray-50 outline-none border hover:border-gray-400 transition"
+                  className="block w-full pl-11 pr-3 py-3.5 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white transition-all duration-200 sm:text-sm"
                   placeholder="you@example.com"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Password</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaLock className="text-gray-400" />
                 </div>
                 <input
@@ -111,16 +147,16 @@ const Register = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-lg py-3 bg-gray-50 outline-none border hover:border-gray-400 transition"
+                  className="block w-full pl-11 pr-3 py-3.5 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white transition-all duration-200 sm:text-sm"
                   placeholder="••••••••"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">I am registering as a:</label>
+              <label className="block text-sm font-bold text-gray-700 mb-3">I am registering as a:</label>
               <div className="flex gap-4">
-                <label className="flex-1 flex items-center justify-center py-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition has-[:checked]:bg-primary/10 has-[:checked]:border-primary has-[:checked]:text-primary">
+                <label className="flex-1 flex items-center justify-center py-3.5 border border-gray-200 rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all has-[:checked]:bg-primary/10 has-[:checked]:border-primary has-[:checked]:text-primary has-[:checked]:shadow-sm">
                   <input 
                     type="radio" 
                     name="role" 
@@ -129,9 +165,9 @@ const Register = () => {
                     onChange={handleChange}
                     className="sr-only" 
                   />
-                  <span className="font-medium">Patient</span>
+                  <span className="font-bold">Patient</span>
                 </label>
-                <label className="flex-1 flex items-center justify-center py-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition has-[:checked]:bg-primary/10 has-[:checked]:border-primary has-[:checked]:text-primary">
+                <label className="flex-1 flex items-center justify-center py-3.5 border border-gray-200 rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all has-[:checked]:bg-primary/10 has-[:checked]:border-primary has-[:checked]:text-primary has-[:checked]:shadow-sm">
                   <input 
                     type="radio" 
                     name="role" 
@@ -140,32 +176,32 @@ const Register = () => {
                     onChange={handleChange}
                     className="sr-only" 
                   />
-                  <span className="font-medium">Doctor</span>
+                  <span className="font-bold">Doctor</span>
                 </label>
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-4">
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white ${loading ? 'bg-primary/70 cursor-not-allowed' : 'bg-primary hover:bg-primary-dark'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition`}
+                className={`w-full flex justify-center items-center gap-2 py-4 px-4 border border-transparent rounded-xl shadow-premium text-sm font-bold text-white ${loading ? 'bg-primary/70 cursor-not-allowed' : 'bg-gradient-premium hover:shadow-premium-hover hover:-translate-y-0.5'} transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary`}
               >
                 {loading ? 'Creating Account...' : 'Create Account'}
               </button>
             </div>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+          <div className="mt-8 text-center sm:text-left">
+            <p className="text-base text-gray-600">
               Already have an account?{' '}
-              <Link to="/login" className="font-medium text-primary hover:text-primary-dark">
-                Sign in here
+              <Link to="/login" className="font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 transition-colors">
+                Sign in here <FaArrowRight className="text-xs" />
               </Link>
             </p>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 };

@@ -63,66 +63,75 @@ const SymptomChecker = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 max-w-md w-full text-center">
-          <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FaRobot className="text-3xl text-primary" />
+      <div className="min-h-screen flex flex-col items-center justify-center p-4">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="glass p-10 rounded-3xl shadow-premium border border-white/50 max-w-md w-full text-center"
+        >
+          <div className="bg-gradient-premium w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <FaRobot className="text-4xl text-white" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">AI Symptom Checker</h2>
-          <p className="text-gray-600 mb-6">Please log in to use our AI-powered symptom checker and get personalized health guidance.</p>
-          <Link to="/login" className="block w-full bg-primary text-white py-3 rounded-xl font-bold hover:bg-primary-dark transition">
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">AI Symptom Checker</h2>
+          <p className="text-gray-700 mb-8 text-lg font-medium">Please log in to use our AI-powered symptom checker and get personalized health guidance.</p>
+          <Link to="/login" className="block w-full bg-gradient-premium text-white py-4 rounded-xl font-bold shadow-premium hover:shadow-premium-hover transition-all transform hover:-translate-y-1">
             Log In to Continue
           </Link>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-50 min-h-[calc(100vh-64px)] py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-[calc(100vh-140px)] flex flex-col">
+    <div className="min-h-[calc(100vh-64px)] py-8 relative">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-[calc(100vh-140px)] flex flex-col relative z-10">
         
         {/* Header */}
-        <div className="bg-white rounded-t-2xl shadow-sm border-b border-gray-100 p-6 flex items-center justify-between z-10 relative">
+        <div className="glass rounded-t-3xl shadow-sm border-b border-white/40 p-6 flex items-center justify-between z-10 relative">
           <div className="flex items-center gap-4">
-            <div className="bg-primary/10 p-3 rounded-full">
-              <FaRobot className="text-2xl text-primary" />
+            <div className="bg-gradient-premium p-3 rounded-2xl shadow-md">
+              <FaRobot className="text-2xl text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">AI Symptom Checker</h1>
-              <p className="text-sm text-green-500 font-medium flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-green-500"></span> Online
+              <h1 className="text-2xl font-extrabold text-gray-900">AI Symptom Checker</h1>
+              <p className="text-sm text-green-600 font-bold flex items-center gap-1.5">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                Online & Ready
               </p>
             </div>
           </div>
-          <div className="hidden md:flex items-center gap-2 text-xs text-amber-600 bg-amber-50 px-3 py-2 rounded-lg border border-amber-100">
-            <FaExclamationTriangle /> Not a substitute for professional medical advice
+          <div className="hidden md:flex items-center gap-2 text-xs font-bold text-amber-700 bg-amber-100/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-amber-200 shadow-sm">
+            <FaExclamationTriangle className="text-sm" /> Not a substitute for professional medical advice
           </div>
         </div>
 
         {/* Chat Area */}
-        <div className="flex-1 bg-white shadow-sm overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 glass bg-white/40 shadow-sm overflow-y-auto p-6 space-y-6 scroll-smooth border-x border-white/40">
           {messages.map((msg, index) => (
             <motion.div 
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
               key={index} 
               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div className={`flex gap-3 max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className="flex-shrink-0 mt-1">
                   {msg.role === 'user' ? (
-                    <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                      <FaUser className="text-gray-500 text-sm" />
+                    <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center shadow-md border-2 border-white">
+                      <FaUser className="text-white text-sm" />
                     </div>
                   ) : (
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-premium rounded-full flex items-center justify-center shadow-md border-2 border-white">
                       <FaRobot className="text-white text-sm" />
                     </div>
                   )}
                 </div>
-                <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-primary text-white rounded-tr-none' : 'bg-gray-100 text-gray-800 rounded-tl-none'}`}>
-                  <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
+                <div className={`p-5 rounded-3xl shadow-sm ${msg.role === 'user' ? 'bg-gradient-premium text-white rounded-tr-none' : 'bg-white/90 backdrop-blur-md border border-white/50 text-gray-800 rounded-tl-none'}`}>
+                  <p className="whitespace-pre-wrap leading-relaxed font-medium">{msg.text}</p>
                 </div>
               </div>
             </motion.div>
@@ -132,14 +141,14 @@ const SymptomChecker = () => {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
               <div className="flex gap-3 max-w-[80%]">
                 <div className="flex-shrink-0 mt-1">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 bg-gradient-premium rounded-full flex items-center justify-center shadow-md border-2 border-white">
                     <FaRobot className="text-white text-sm" />
                   </div>
                 </div>
-                <div className="bg-gray-100 p-4 rounded-2xl rounded-tl-none flex items-center gap-2">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                <div className="bg-white/90 backdrop-blur-md border border-white/50 p-5 rounded-3xl rounded-tl-none flex items-center gap-2 shadow-sm">
+                  <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce"></div>
+                  <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
                 </div>
               </div>
             </motion.div>
@@ -148,28 +157,28 @@ const SymptomChecker = () => {
         </div>
 
         {/* Input Area */}
-        <div className="bg-white rounded-b-2xl shadow-sm border-t border-gray-100 p-4">
+        <div className="glass rounded-b-3xl shadow-sm border-t border-white/40 p-5 z-10 relative">
           <form onSubmit={handleSubmit} className="flex gap-4">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Describe your symptoms (e.g., 'I have a headache and mild fever')..."
-              className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+              className="flex-1 bg-white/80 backdrop-blur-sm border-none shadow-sm rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-primary font-medium text-gray-800 transition-all"
               disabled={loading}
             />
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className={`px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition ${
-                loading || !input.trim() ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-primary text-white hover:bg-primary-dark'
+              className={`px-8 py-4 rounded-2xl font-bold flex items-center gap-3 transition-all transform ${
+                loading || !input.trim() ? 'bg-white/50 text-gray-400 cursor-not-allowed shadow-none' : 'bg-gradient-premium text-white shadow-premium hover:shadow-premium-hover hover:-translate-y-1'
               }`}
             >
               <span className="hidden sm:inline">Send</span> <FaPaperPlane />
             </button>
           </form>
-          <div className="text-center mt-3 md:hidden">
-             <p className="text-xs text-amber-600 flex items-center justify-center gap-1">
+          <div className="text-center mt-4 md:hidden">
+             <p className="text-xs font-bold text-amber-700 bg-amber-100/80 backdrop-blur-sm py-2 rounded-lg flex items-center justify-center gap-1.5 border border-amber-200">
                 <FaExclamationTriangle /> Not for medical emergencies
              </p>
           </div>
