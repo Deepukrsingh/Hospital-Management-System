@@ -52,6 +52,23 @@ export const bookAppointment = createAsyncThunk(
   }
 );
 
+// Fetch booked slots for a doctor and date
+export const fetchBookedSlots = createAsyncThunk(
+  'appointments/fetchBookedSlots',
+  async ({ doctorId, date }, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/appointments/booked-slots?doctorId=${doctorId}&date=${date}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 // Update appointment status (Admin/Doctor)
 export const updateAppointmentStatus = createAsyncThunk(
   'appointments/updateStatus',
@@ -69,8 +86,26 @@ export const updateAppointmentStatus = createAsyncThunk(
   }
 );
 
+// Add prescription (Doctor)
+export const addPrescription = createAsyncThunk(
+  'appointments/addPrescription',
+  async ({ id, prescriptionData }, { rejectWithValue }) => {
+    try {
+      const response = await api.put(`/appointments/${id}/prescription`, prescriptionData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 const initialState = {
   appointments: [],
+  bookedSlots: [],
   loading: false,
   error: null,
   success: false,
@@ -83,6 +118,7 @@ const appointmentSlice = createSlice({
     clearAppointmentState: (state) => {
       state.error = null;
       state.success = false;
+      state.bookedSlots = [];
     }
   },
   extraReducers: (builder) => {
@@ -143,6 +179,38 @@ const appointmentSlice = createSlice({
         }
       })
       .addCase(updateAppointmentStatus.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Add Prescription
+      .addCase(addPrescription.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = false;
+      })
+      .addCase(addPrescription.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        const index = state.appointments.findIndex(a => a._id === action.payload._id);
+        if (index !== -1) {
+          state.appointments[index] = action.payload;
+        }
+      })
+      .addCase(addPrescription.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.success = false;
+      })
+      // Fetch Booked Slots
+      .addCase(fetchBookedSlots.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchBookedSlots.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookedSlots = action.payload;
+      })
+      .addCase(fetchBookedSlots.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

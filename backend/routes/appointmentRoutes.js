@@ -4,7 +4,9 @@ const {
     bookAppointment, 
     getMyAppointments, 
     updateAppointmentStatus, 
-    getAllAppointments 
+    getAllAppointments,
+    addPrescription,
+    getBookedSlots
 } = require('../controllers/appointmentController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 
@@ -15,7 +17,13 @@ router.route('/')
 router.route('/myappointments')
     .get(protect, getMyAppointments);
 
+router.route('/booked-slots')
+    .get(protect, getBookedSlots);
+
 router.route('/:id/status')
     .put(protect, authorize('Doctor', 'Admin'), updateAppointmentStatus);
+
+router.route('/:id/prescription')
+    .put(protect, authorize('Doctor'), addPrescription);
 
 module.exports = router;

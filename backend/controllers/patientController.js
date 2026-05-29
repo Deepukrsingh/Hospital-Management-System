@@ -57,9 +57,24 @@ const addLabReport = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+// @desc    Get patient records by user ID
+// @route   GET /api/patient/:userId/records
+// @access  Private (Doctor, Admin)
+const getPatientRecordsById = async (req, res) => {
+    try {
+        const patient = await getOrCreatePatientProfile(req.params.userId);
+        res.json({
+            medicalHistory: patient.medicalHistory || [],
+            labReports: patient.labReports || []
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 module.exports = {
     getPatientRecords,
     addMedicalHistory,
-    addLabReport
+    addLabReport,
+    getPatientRecordsById
 };

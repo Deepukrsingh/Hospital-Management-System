@@ -45,7 +45,7 @@ const Services = () => {
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            className="text-4xl md:text-5xl font-bold text-white mb-6"
           >
             Our <span className="text-primary">Medical Services</span>
           </motion.h1>
@@ -53,7 +53,7 @@ const Services = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-gray-600"
+            className="text-xl text-gray-400"
           >
             We offer a wide range of specialized medical services using state-of-the-art technology and expert healthcare professionals.
           </motion.p>
@@ -67,16 +67,16 @@ const Services = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group"
+              className="glass-dark p-8 rounded-2xl border border-white/5 hover:border-primary/30 transition-all duration-300 hover-glow-blue group"
             >
-              <div className="w-16 h-16 bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className="w-16 h-16 bg-white/5 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-all duration-300">
                 {service.icon}
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
+              <p className="text-gray-400 leading-relaxed">
                 {service.description}
               </p>
-              <div className="mt-6 pt-6 border-t border-gray-100">
+              <div className="mt-6 pt-6 border-t border-white/10">
                 <a href="/doctors" className="text-primary font-bold hover:text-primary-dark flex items-center gap-2">
                   Find a Specialist <span>→</span>
                 </a>

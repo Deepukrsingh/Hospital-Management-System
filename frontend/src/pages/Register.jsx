@@ -46,12 +46,10 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex text-white relative">
       {/* Left side - Image/Gradient */}
       <div className="hidden lg:flex lg:flex-1 relative overflow-hidden bg-primary/5">
         <div className="absolute inset-0 bg-gradient-premium opacity-90 mix-blend-multiply"></div>
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-12 -right-12 w-72 h-72 bg-purple-400/30 rounded-full blur-3xl"></div>
         
         <div className="relative w-full flex flex-col justify-center items-center px-12 text-white z-10 text-center">
           <motion.div
@@ -92,15 +90,15 @@ const Register = () => {
               <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                 <FaHeartbeat className="text-2xl text-primary" />
               </div>
-              <span className="text-2xl font-extrabold text-gray-900 tracking-tight">Medicure</span>
+              <span className="text-2xl font-extrabold text-white tracking-tight">Medicure</span>
             </Link>
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-2">Create Account</h2>
-            <p className="text-lg text-gray-500">Join us to start your healthcare journey.</p>
+            <h2 className="text-4xl font-extrabold text-white mb-2">Create Account</h2>
+            <p className="text-lg text-gray-400">Join us to start your healthcare journey.</p>
           </div>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
+              <label className="block text-sm font-bold text-gray-300 mb-2">Full Name</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaUser className="text-gray-400" />
@@ -111,14 +109,14 @@ const Register = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="block w-full pl-11 pr-3 py-3.5 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white transition-all duration-200 sm:text-sm"
+                  className="block w-full pl-11 pr-3 py-3.5 border border-white/10 rounded-xl leading-5 glass-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-slate-900/60 transition-all duration-200 sm:text-sm"
                   placeholder="John Doe"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+              <label className="block text-sm font-bold text-gray-300 mb-2">Email Address</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaEnvelope className="text-gray-400" />
@@ -129,14 +127,14 @@ const Register = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="block w-full pl-11 pr-3 py-3.5 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white transition-all duration-200 sm:text-sm"
+                  className="block w-full pl-11 pr-3 py-3.5 border border-white/10 rounded-xl leading-5 glass-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-slate-900/60 transition-all duration-200 sm:text-sm"
                   placeholder="you@example.com"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
+              <label className="block text-sm font-bold text-gray-300 mb-2">Password</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaLock className="text-gray-400" />
@@ -147,39 +145,13 @@ const Register = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full pl-11 pr-3 py-3.5 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white transition-all duration-200 sm:text-sm"
+                  className="block w-full pl-11 pr-3 py-3.5 border border-white/10 rounded-xl leading-5 glass-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-slate-900/60 transition-all duration-200 sm:text-sm"
                   placeholder="••••••••"
                 />
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-3">I am registering as a:</label>
-              <div className="flex gap-4">
-                <label className="flex-1 flex items-center justify-center py-3.5 border border-gray-200 rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all has-[:checked]:bg-primary/10 has-[:checked]:border-primary has-[:checked]:text-primary has-[:checked]:shadow-sm">
-                  <input 
-                    type="radio" 
-                    name="role" 
-                    value="Patient" 
-                    checked={formData.role === 'Patient'}
-                    onChange={handleChange}
-                    className="sr-only" 
-                  />
-                  <span className="font-bold">Patient</span>
-                </label>
-                <label className="flex-1 flex items-center justify-center py-3.5 border border-gray-200 rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all has-[:checked]:bg-primary/10 has-[:checked]:border-primary has-[:checked]:text-primary has-[:checked]:shadow-sm">
-                  <input 
-                    type="radio" 
-                    name="role" 
-                    value="Doctor" 
-                    checked={formData.role === 'Doctor'}
-                    onChange={handleChange}
-                    className="sr-only" 
-                  />
-                  <span className="font-bold">Doctor</span>
-                </label>
-              </div>
-            </div>
+
 
             <div className="pt-4">
               <button
@@ -193,7 +165,7 @@ const Register = () => {
           </form>
 
           <div className="mt-8 text-center sm:text-left">
-            <p className="text-base text-gray-600">
+            <p className="text-base text-gray-400">
               Already have an account?{' '}
               <Link to="/login" className="font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 transition-colors">
                 Sign in here <FaArrowRight className="text-xs" />

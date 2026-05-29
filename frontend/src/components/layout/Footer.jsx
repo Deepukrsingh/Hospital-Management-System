@@ -4,27 +4,28 @@ import { FaHeartbeat, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaArrow
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-white pt-20 pb-10 border-t border-gray-800 relative overflow-hidden">
+    <footer className="bg-dark text-white pt-20 pb-10 border-t border-card relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="bg-primary/20 p-2.5 rounded-xl">
+              <div className="bg-primary/20 p-2.5 rounded-xl border border-primary/30">
                 <FaHeartbeat className="text-3xl text-primary" />
               </div>
-              <span className="text-3xl font-extrabold tracking-tight">Medicure</span>
+              <span className="text-3xl font-extrabold tracking-tight text-white">Medicure</span>
             </div>
             <p className="text-gray-400 text-base mb-8 leading-relaxed">
               Providing world-class healthcare solutions with modern technology and expert medical professionals. Your health, our priority.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1"><FaFacebookF /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1"><FaTwitter /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1"><FaInstagram /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1"><FaLinkedinIn /></a>
+              <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(99,102,241,0.3)]"><FaFacebookF /></a>
+              <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(99,102,241,0.3)]"><FaTwitter /></a>
+              <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(99,102,241,0.3)]"><FaInstagram /></a>
+              <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(99,102,241,0.3)]"><FaLinkedinIn /></a>
             </div>
           </div>
           
@@ -53,21 +54,23 @@ const Footer = () => {
             <ul className="space-y-4 text-gray-400 text-sm font-medium">
               <li className="flex flex-col">
                 <span className="text-gray-500 mb-1 text-xs uppercase tracking-wider">Address</span>
-                123 Healthcare Ave, Medical District<br/>New York, NY 10001
+                <a href="https://maps.google.com/?q=Sector+62,+Noida,+Uttar+Pradesh,+India+201309" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  A-12, Tech Park, Sector 62<br/>Noida, UP, India 201309
+                </a>
               </li>
               <li className="flex flex-col mt-4">
                 <span className="text-gray-500 mb-1 text-xs uppercase tracking-wider">Email</span>
-                <a href="mailto:info@medicure.com" className="hover:text-primary transition-colors">info@medicure.com</a>
+                <a href="mailto:contact.medicure@gmail.com" className="hover:text-primary transition-colors">contact.medicure@gmail.com</a>
               </li>
               <li className="flex flex-col mt-4">
                 <span className="text-gray-500 mb-1 text-xs uppercase tracking-wider">Phone</span>
-                <a href="tel:+15551234567" className="hover:text-primary transition-colors">+1 (555) 123-4567</a>
+                <a href="tel:+919876543210" className="hover:text-primary transition-colors">+91 98765 43210</a>
               </li>
             </ul>
           </div>
         </div>
         
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm font-medium">
+        <div className="border-t border-card pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm font-medium">
           <p>&copy; {new Date().getFullYear()} Medicure Healthcare. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

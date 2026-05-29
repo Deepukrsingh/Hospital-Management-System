@@ -1,16 +1,14 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+require('dotenv').config();
 
-const genAI = new GoogleGenerativeAI('YOUR_API_KEY');
-
-const systemPrompt = `You are a helpful medical AI.`;
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 async function test() {
     try {
         console.log("Initializing model...");
 
         const model = genAI.getGenerativeModel({
-            model: 'gemini-1.5-flash',
-            systemInstruction: systemPrompt
+            model: 'gemini-2.0-flash',
         });
 
         console.log("Generating response...");

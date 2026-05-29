@@ -14,12 +14,17 @@ const SymptomChecker = () => {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
   
   const { isAuthenticated } = useSelector(state => state.auth);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {
@@ -72,8 +77,8 @@ const SymptomChecker = () => {
           <div className="bg-gradient-premium w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
             <FaRobot className="text-4xl text-white" />
           </div>
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">AI Symptom Checker</h2>
-          <p className="text-gray-700 mb-8 text-lg font-medium">Please log in to use our AI-powered symptom checker and get personalized health guidance.</p>
+          <h2 className="text-3xl font-extrabold text-white mb-4 tracking-tight">AI Symptom Checker</h2>
+          <p className="text-gray-400 mb-8 text-lg font-medium">Please log in to use our AI-powered symptom checker and get personalized health guidance.</p>
           <Link to="/login" className="block w-full bg-gradient-premium text-white py-4 rounded-xl font-bold shadow-premium hover:shadow-premium-hover transition-all transform hover:-translate-y-1">
             Log In to Continue
           </Link>
@@ -87,14 +92,14 @@ const SymptomChecker = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-[calc(100vh-140px)] flex flex-col relative z-10">
         
         {/* Header */}
-        <div className="glass rounded-t-3xl shadow-sm border-b border-white/40 p-6 flex items-center justify-between z-10 relative">
+        <div className="glass rounded-t-3xl shadow-sm border-b border-white/10 p-6 flex items-center justify-between z-10 relative">
           <div className="flex items-center gap-4">
             <div className="bg-gradient-premium p-3 rounded-2xl shadow-md">
               <FaRobot className="text-2xl text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold text-gray-900">AI Symptom Checker</h1>
-              <p className="text-sm text-green-600 font-bold flex items-center gap-1.5">
+              <h1 className="text-2xl font-extrabold text-white">AI Symptom Checker</h1>
+              <p className="text-sm text-emerald-400 font-bold flex items-center gap-1.5">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -103,13 +108,13 @@ const SymptomChecker = () => {
               </p>
             </div>
           </div>
-          <div className="hidden md:flex items-center gap-2 text-xs font-bold text-amber-700 bg-amber-100/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-amber-200 shadow-sm">
+          <div className="hidden md:flex items-center gap-2 text-xs font-bold text-amber-400 bg-amber-500/10 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-amber-500/20 shadow-sm">
             <FaExclamationTriangle className="text-sm" /> Not a substitute for professional medical advice
           </div>
         </div>
 
         {/* Chat Area */}
-        <div className="flex-1 glass bg-white/40 shadow-sm overflow-y-auto p-6 space-y-6 scroll-smooth border-x border-white/40">
+        <div ref={chatContainerRef} className="flex-1 glass glass-dark/40 shadow-sm overflow-y-auto p-6 space-y-6 scroll-smooth border-x border-white/10">
           {messages.map((msg, index) => (
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -130,7 +135,7 @@ const SymptomChecker = () => {
                     </div>
                   )}
                 </div>
-                <div className={`p-5 rounded-3xl shadow-sm ${msg.role === 'user' ? 'bg-gradient-premium text-white rounded-tr-none' : 'bg-white/90 backdrop-blur-md border border-white/50 text-gray-800 rounded-tl-none'}`}>
+                <div className={`p-5 rounded-3xl shadow-sm ${msg.role === 'user' ? 'bg-gradient-premium text-white rounded-tr-none' : 'glass-dark/90 backdrop-blur-md border border-white/10 text-white rounded-tl-none'}`}>
                   <p className="whitespace-pre-wrap leading-relaxed font-medium">{msg.text}</p>
                 </div>
               </div>
@@ -145,7 +150,7 @@ const SymptomChecker = () => {
                     <FaRobot className="text-white text-sm" />
                   </div>
                 </div>
-                <div className="bg-white/90 backdrop-blur-md border border-white/50 p-5 rounded-3xl rounded-tl-none flex items-center gap-2 shadow-sm">
+                <div className="glass-dark/90 backdrop-blur-md border border-white/10 p-5 rounded-3xl rounded-tl-none flex items-center gap-2 shadow-sm">
                   <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce"></div>
                   <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                   <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
@@ -153,32 +158,31 @@ const SymptomChecker = () => {
               </div>
             </motion.div>
           )}
-          <div ref={messagesEndRef} />
         </div>
 
         {/* Input Area */}
-        <div className="glass rounded-b-3xl shadow-sm border-t border-white/40 p-5 z-10 relative">
+        <div className="glass rounded-b-3xl shadow-sm border-t border-white/10 p-5 z-10 relative">
           <form onSubmit={handleSubmit} className="flex gap-4">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Describe your symptoms (e.g., 'I have a headache and mild fever')..."
-              className="flex-1 bg-white/80 backdrop-blur-sm border-none shadow-sm rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-primary font-medium text-gray-800 transition-all"
+              className="flex-1 glass-dark backdrop-blur-sm border-none shadow-sm rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-primary font-medium text-white transition-all"
               disabled={loading}
             />
             <button
               type="submit"
               disabled={loading || !input.trim()}
               className={`px-8 py-4 rounded-2xl font-bold flex items-center gap-3 transition-all transform ${
-                loading || !input.trim() ? 'bg-white/50 text-gray-400 cursor-not-allowed shadow-none' : 'bg-gradient-premium text-white shadow-premium hover:shadow-premium-hover hover:-translate-y-1'
+                loading || !input.trim() ? 'glass-dark/50 text-gray-400 cursor-not-allowed shadow-none' : 'bg-gradient-premium text-white shadow-premium hover:shadow-premium-hover hover:-translate-y-1'
               }`}
             >
               <span className="hidden sm:inline">Send</span> <FaPaperPlane />
             </button>
           </form>
           <div className="text-center mt-4 md:hidden">
-             <p className="text-xs font-bold text-amber-700 bg-amber-100/80 backdrop-blur-sm py-2 rounded-lg flex items-center justify-center gap-1.5 border border-amber-200">
+             <p className="text-xs font-bold text-amber-400 bg-amber-500/10 backdrop-blur-sm py-2 rounded-lg flex items-center justify-center gap-1.5 border border-amber-500/20">
                 <FaExclamationTriangle /> Not for medical emergencies
              </p>
           </div>

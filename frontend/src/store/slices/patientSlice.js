@@ -49,9 +49,26 @@ export const addLabReport = createAsyncThunk(
   }
 );
 
+export const fetchPatientRecordsById = createAsyncThunk(
+  'patient/fetchRecordsById',
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/patient/${userId}/records`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 const initialState = {
   medicalHistory: [],
   labReports: [],
+  viewedPatientRecords: null,
   loading: false,
   error: null,
   success: false
@@ -66,6 +83,9 @@ const patientSlice = createSlice({
     },
     clearPatientSuccess: (state) => {
       state.success = false;
+    },
+    clearViewedPatientRecords: (state) => {
+      state.viewedPatientRecords = null;
     }
   },
   extraReducers: (builder) => {
@@ -80,6 +100,18 @@ const patientSlice = createSlice({
         state.labReports = action.payload.labReports;
       })
       .addCase(fetchPatientRecords.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Fetch Records By Id (for Doctor)
+      .addCase(fetchPatientRecordsById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchPatientRecordsById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.viewedPatientRecords = action.payload;
+      })
+      .addCase(fetchPatientRecordsById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
@@ -112,5 +144,5 @@ const patientSlice = createSlice({
   },
 });
 
-export const { clearPatientError, clearPatientSuccess } = patientSlice.actions;
+export const { clearPatientError, clearPatientSuccess, clearViewedPatientRecords } = patientSlice.actions;
 export default patientSlice.reducer;

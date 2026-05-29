@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex text-white relative">
       {/* Left side - Form */}
       <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
         <motion.div 
@@ -58,15 +58,15 @@ const Login = () => {
               <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                 <FaHeartbeat className="text-2xl text-primary" />
               </div>
-              <span className="text-2xl font-extrabold text-gray-900 tracking-tight">Medicure</span>
+              <span className="text-2xl font-extrabold text-white tracking-tight">Medicure</span>
             </Link>
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-2">Welcome Back</h2>
-            <p className="text-lg text-gray-500">Please enter your details to sign in.</p>
+            <h2 className="text-4xl font-extrabold text-white mb-2">Welcome Back</h2>
+            <p className="text-lg text-gray-400">Please enter your details to sign in.</p>
           </div>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+              <label className="block text-sm font-bold text-gray-300 mb-2">Email Address</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaEnvelope className="text-gray-400" />
@@ -77,14 +77,14 @@ const Login = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="block w-full pl-11 pr-3 py-4 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white transition-all duration-200 sm:text-sm"
+                  className="block w-full pl-11 pr-3 py-4 border border-white/10 rounded-xl leading-5 glass-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-slate-900/60 transition-all duration-200 sm:text-sm"
                   placeholder="Enter your email"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
+              <label className="block text-sm font-bold text-gray-300 mb-2">Password</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaLock className="text-gray-400" />
@@ -95,7 +95,7 @@ const Login = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full pl-11 pr-3 py-4 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white transition-all duration-200 sm:text-sm"
+                  className="block w-full pl-11 pr-3 py-4 border border-white/10 rounded-xl leading-5 glass-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-slate-900/60 transition-all duration-200 sm:text-sm"
                   placeholder="••••••••"
                 />
               </div>
@@ -109,7 +109,7 @@ const Login = () => {
                   type="checkbox"
                   className="h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded cursor-pointer"
                 />
-                <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-700 cursor-pointer">
+                <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-300 cursor-pointer">
                   Remember me
                 </label>
               </div>
@@ -131,7 +131,7 @@ const Login = () => {
           </form>
 
           <div className="mt-8 text-center sm:text-left">
-            <p className="text-base text-gray-600">
+            <p className="text-base text-gray-400">
               Don't have an account?{' '}
               <Link to="/register" className="font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 transition-colors">
                 Create one now <FaArrowRight className="text-xs" />
@@ -144,8 +144,6 @@ const Login = () => {
       {/* Right side - Image/Gradient */}
       <div className="hidden lg:flex lg:flex-1 relative overflow-hidden bg-primary/5">
         <div className="absolute inset-0 bg-gradient-premium opacity-90 mix-blend-multiply"></div>
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-12 -left-12 w-72 h-72 bg-blue-400/30 rounded-full blur-3xl"></div>
         
         <div className="relative w-full flex flex-col justify-center items-center px-12 text-white z-10 text-center">
           <motion.div

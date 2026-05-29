@@ -34,7 +34,20 @@ const getDoctorById = async (req, res) => {
 // @access  Private/Admin
 const createDoctor = async (req, res) => {
     try {
-        const { userId, specialization, experience, fees } = req.body;
+        const { 
+            userId, 
+            specialization, 
+            experience, 
+            feesPerCunsultation, 
+            timings, 
+            status,
+            qualifications,
+            designation,
+            department,
+            about,
+            education,
+            experienceList
+        } = req.body;
         
         // Ensure user exists and is a doctor
         const user = await User.findById(userId);
@@ -49,9 +62,17 @@ const createDoctor = async (req, res) => {
 
         const doctor = await Doctor.create({
             user: userId,
-            specialization,
-            experience,
-            fees
+            specialization: specialization || 'General Practice',
+            experience: Number(experience) || 0,
+            feesPerCunsultation: Number(feesPerCunsultation) || 0,
+            timings: Array.isArray(timings) && timings.length > 0 ? timings : ['09:00 AM', '11:00 AM', '02:00 PM'],
+            status: status || 'pending',
+            qualifications: qualifications || '',
+            designation: designation || '',
+            department: department || '',
+            about: about || '',
+            education: Array.isArray(education) ? education : education ? [education] : [],
+            experienceList: Array.isArray(experienceList) ? experienceList : experienceList ? [experienceList] : []
         });
 
         res.status(201).json(doctor);

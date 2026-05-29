@@ -22,6 +22,30 @@ const doctorSchema = new mongoose.Schema({
         type: Array, // Array of strings or objects representing available slots
         required: true
     },
+    qualifications: {
+        type: [String],
+        default: []
+    },
+    designation: {
+        type: String,
+        default: ''
+    },
+    department: {
+        type: String,
+        default: ''
+    },
+    about: {
+        type: String,
+        default: ''
+    },
+    education: {
+        type: [String],
+        default: []
+    },
+    experienceList: {
+        type: [String],
+        default: []
+    },
     status: {
         type: String,
         default: 'pending',

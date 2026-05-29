@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Doctors from './pages/Doctors';
 import Services from './pages/Services';
 import SymptomChecker from './pages/SymptomChecker';
+import HealthCheckups from './pages/HealthCheckups';
 import ProtectedRoute from './components/routing/ProtectedRoute';
 import PatientDashboard from './pages/dashboards/PatientDashboard';
 import DoctorDashboard from './pages/dashboards/DoctorDashboard';
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+      <div className="min-h-screen bg-transparent text-text-primary flex flex-col font-sans">
         <Navbar />
         
         <main className="flex-grow">
@@ -37,6 +38,7 @@ function App() {
             <Route path="/doctors" element={<Doctors />} />
             <Route path="/services" element={<Services />} />
             <Route path="/symptom-checker" element={<SymptomChecker />} />
+            <Route path="/health-checkups" element={<HealthCheckups />} />
             <Route 
               path="/dashboard/patient" 
               element={

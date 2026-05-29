@@ -57,6 +57,14 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ email }).select('+password');
 
         if (user && (await user.matchPassword(password))) {
+            if (user.role === 'Doctor') {
+                const Doctor = require('../models/Doctor');
+                const doctorProfile = await Doctor.findOne({ user: user._id });
+                if (!doctorProfile) {
+                    return res.status(403).json({ message: 'Invalid doctor account. Please contact administration.' });
+                }
+            }
+
             res.json({
                 _id: user._id,
                 name: user.name,
